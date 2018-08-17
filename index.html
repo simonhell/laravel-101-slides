@@ -96,12 +96,13 @@
 	<ul>
 		<li class="fragment roll-in">Xampp (PHP, MySQL)</li>
 		<li class="fragment roll-in">Jetbrains PhpStorm</li>
+		<li class="fragment roll-in"></li>
 		<li class="fragment roll-in">XDEBUG
 			<em class="aside">
 				<a href="https://www.jetbrains.com/help/phpstorm/configuring-xdebug.html"><i class="fa fa-cloud-download"></i> install it</a>
 			</em>
 		</li>
-		<li class="fragment roll-in">Git</li>
+		<li class="fragment roll-in">Git & GitHub Account</li>
 		</li>
 		<li class="fragment roll-in">Composer
 			<em class="aside">
@@ -113,39 +114,25 @@
 
 
 <section class="full-height" data-background="/img/vintage-computer3.jpg" data-background-transition="slide" data-transition="linear">
-	<h2 class="bar">Your First Project</h2>
+	<h2 class="bar">Erstes Projekt</h2>
 </section>
 
 
 <section>
-	<h2>Starting a New Project</h2>
+	<h2>Neues Projekt anlegen</h2>
 	<pre>
 <code contenteditable data-trim class="bash">
-composer create-project laravel/laravel my-project --prefer-dist
+composer global require "laravel/installer"
 </code>
 	</pre>
 	<pre class="fragment">
 <code contenteditable data-trim class="bash">
-git clone git@github.com:laravel/laravel.git my-project
-cd my-project
-composer install
-</code>
-	</pre>
-	<pre class="fragment">
-<code contenteditable data-trim class="bash">
-curl -L -O https://github.com/laravel/laravel/archive/master.zip
-unzip master.zip
-mv laravel-master my-project
-cd my-project
-composer install
+laravel new blog
 </code>
 	</pre>
 	<div class="fragment wat skewed stamp-in" >
-		<img src="/img/wat.jpg">
+		<img src="/img/magic.gif">
 	</div>
-	<aside class="notes">
-<i class="fa fa-fw fa-terminal"></i> composer create-project laravel/laravel my-project --prefer-dist
-	</aside>
 </section>
 
 
@@ -163,49 +150,43 @@ composer install
 
 
 <section>
-	<h2>Project Folders</h2>
+	<h2>Projektstruktur</h2>
 	<ul class="folders">
 		<li>app
 			<span class="handwriting fragment inline padded highlight-active">&lt; your stuff</span>
 		</li>
 		<li>bootstrap
-			<span class="handwriting fragment inline padded highlight-active">&lt;  startup stuff</span>
+			<span class="handwriting fragment inline padded highlight-active">&lt; startup stuff</span>
+		</li>
+		<li>config
+			<span class="handwriting fragment inline padded highlight-active">&lt; configurations</span>
+		</li>
+		<li>database
+			<span class="handwriting fragment inline padded highlight-active">&lt; databasy things </span>
 		</li>
 		<li>public
 			<span class="handwriting fragment inline padded highlight-active">&lt; static stuff: img, js, css, etc.</span>
 		</li>
+		<li>resources
+			<span class="handwriting fragment inline padded highlight-active">&lt; MVC-Views, JS-Code, Language-Files</span>
+		</li>
+		<li>routes
+			<span class="handwriting fragment inline padded highlight-active">&lt; create some fancy URL's here</span>
+		</li>
+		<li>storage
+			<span class="handwriting fragment inline padded highlight-active">&lt; place to save uploads</span>
+		</li>
+		<li>tests
+			<span class="handwriting fragment inline padded highlight-active">&lt; testing stuff</span>
+		</li>
 		<li class="file">composer.json
-			<span class="handwriting fragment inline padded highlight-active">&lt; other people's stuff you want</span>
+			<span class="handwriting fragment inline padded highlight-active">&lt; stuff you want from others</span>
 		</li>
 		<li>vendor
-			<span class="handwriting fragment inline padded highlight-active">&lt; other people's stuff</span>
+			<span class="handwriting fragment inline padded highlight-active">&lt; other people's stuff (libraries)</span>
 		</li>
 	</ul>
 </section>
-
-
-<section>
-	<h2>Application Folders</h2>
-	<ul class="folders">
-		<li>app
-			<ul>
-				<li>commands</li>
-				<li>config</li>
-				<li class="fragment highlight-blue" data-fragment-index="1">controllers</li>
-				<li>database</li>
-				<li>lang</li>
-				<li class="fragment highlight-blue" data-fragment-index="1">models</li>
-				<li>start</li>
-				<li>storage</li>
-				<li>tests</li>
-				<li class="fragment highlight-blue" data-fragment-index="1">views</li>
-				<li class="file">filters.php</li>
-				<li class="file fragment highlight-blue" data-fragment-index="1">routes.php</li>
-			</ul>
-		</li>
-	</ul>
-</section>
-
 
 <section class="full-height" data-background="/img/bob-ross.jpg" data-background-transition="slide" data-transition="linear">
 	<h2 class="bar">Artisan</h2>
@@ -214,30 +195,23 @@ composer install
 
 <section class="stack">
 	<section>
-		<h2>Artisan</h2>
+		<h2>Artisan (Künstler)</h2>
 		<p>
-			Command line tool to make working with Laravel easier.
+			Command line tool von Laravel, das uns noch viel Arbeit ersparen wird.
 		</p>
 		<pre>
 <code contenteditable data-trim class="bash">
 php artisan
 </code>
 		</pre>
-	</section>
-
-	<section>
-		<h2>Built-in Server</h2>
+		<h2>Eingebauter Server</h2>
+		<p>localhost:8000</p>
 		<pre>
 <code contenteditable data-trim class="bash">
-php artisan serve --port 8000
+php artisan serve
 </code>
 		</pre>
-		<aside class="notes">
-			<i class="fa fa-fw fa-terminal"></i> php artisan serve<br>
-			<i class="fa fa-fw fa-compass"></i> localhost:8000
-		</aside>
 	</section>
-
 </section>
 
 
@@ -249,55 +223,48 @@ php artisan serve --port 8000
 <section>
 	<h2>Basic Routing</h2>
 	<pre>
-<code contenteditable data-trim class="php" data-filename="app/routes.php">
-Route::get('/', function() {
+<code contenteditable data-trim class="php" data-filename="routes/web.php">
+Route::get('/hello', function() {
 	return 'Hello World!';
 });
 </code>
 	</pre>
-	<aside class="notes">
-		<i class="fa fa-fw fa-terminal"></i> git checkout v2.0
-		<i class="fa fa-fw fa-compass"></i> localhost:8000
-	</aside>
 </section>
-
-
 
 <section>
 	<h2>Route Parameters</h2>
 	<div class="fragment-block">
 		<pre>
-<code contenteditable data-trim class="php" data-filename="app/routes.php">
+<code contenteditable data-trim class="php" data-filename="routes/web.php">
 // pass parameters via URI
 
-Route::get('/hello/{name}', function($name)
-{
-	return 'Hello, ' . $name;
+Route::get('/hello/{name}', function($name) {
+   return 'Hello ' . $name . '!';
 });
+
 </code>
 		</pre>
 		<pre class="fragment">
-<code contenteditable data-trim class="php" data-filename="app/routes.php">
+<code contenteditable data-trim class="php" data-filename="routes/web.php">
 // escape output for safety
 
 Route::get('/hello/{name}', function($name)
 {
-	return 'Hello, ' . e($name);
+	return 'Hello, ' . e($name) . '!';
 });
 </code>
 		</pre>
 		<pre class="fragment">
-<code contenteditable data-trim class="php" data-filename="app/routes.php">
+<code contenteditable data-trim class="php" data-filename="routes/web.php">
 // filter the URI data
 
-Route::get('/hello/{name}', function($name)
-{
-	return 'Hello, ' . e($name);
-})->where('name','[A-za-z]+');
+Route::get('/hello/{name}', function($name) {
+   return 'Hello ' . e($name) . '!';
+})->where('name', '[A-za-z]+');
 </code>
 		</pre>
 		<pre class="fragment">
-<code contenteditable data-trim class="php" data-filename="app/routes.php">
+<code contenteditable data-trim class="php" data-filename="routes/web.php">
 // make the param optional
 
 Route::get('/hello/{name?}', function($name='stranger')
@@ -307,10 +274,6 @@ Route::get('/hello/{name?}', function($name='stranger')
 </code>
 		</pre>
 	</div>
-	<aside class="notes">
-<i class="fa fa-fw fa-terminal"></i> git checkout v2.1<br>
-<i class="fa fa-fw fa-compass"></i> /hello/Colin
-	</aside>
 </section>
 
 
@@ -322,7 +285,7 @@ php artisan routes
 </code>
 	</pre>
 	<aside class="notes">
-		<i class="fa fa-fw fa-terminal"></i> php artisan routes<br>
+		<i class="fa fa-fw fa-terminal"></i> php artisan route:list<br>
 	</aside>
 </section>
 
@@ -334,7 +297,7 @@ php artisan routes
 <section>
 	<h2>Controller Routing</h2>
 	<pre>
-<code contenteditable data-trim class="php" data-filename="app/routes.php">
+<code contenteditable data-trim class="php" data-filename="routes/web.php">
 Route::get('hello/{name?}', 'HelloController@showWelcome');
 </code>
 	</pre>
@@ -360,7 +323,7 @@ class HelloController extends BaseController {
 <section>
 	<h2>RESTful Controllers</h2>
 	<pre>
-<code contenteditable data-trim class="php" data-filename="app/routes.php">
+<code contenteditable data-trim class="php" data-filename="routes/web.php">
 Route::controller('users', 'UsersController');
 </code>
 	</pre>
@@ -381,7 +344,7 @@ class UsersController extends BaseController {
 	</pre>
 	<aside class="notes">
 <i class="fa fa-fw fa-terminal"></i> git checkout v3.0<br>
-<i class="fa fa-fw fa-pencil"></i> app/routes.php<br>
+<i class="fa fa-fw fa-pencil"></i> routes/web.php<br>
 <i class="fa fa-fw fa-pencil"></i> app/controllers/UsersController.php
 	</aside>
 </section>
@@ -395,7 +358,7 @@ php artisan controller:make PostsController
 </code>
 	</pre>
 	<pre class="fragment">
-<code contenteditable data-trim class="php" data-filename="app/routes.php">
+<code contenteditable data-trim class="php" data-filename="routes/web.php">
 Route::resource('posts', 'PostsController');
 </code>
 	</pre>
@@ -421,7 +384,7 @@ php artisan routes
 	</pre>
 	<aside class="notes">
 <i class="fa fa-fw fa-terminal"></i> php artisan controller:make PostsController<br>
-<i class="fa fa-fw fa-pencil"></i> app/routes.php<br>
+<i class="fa fa-fw fa-pencil"></i> routes/web.php<br>
 <i class="fa fa-fw fa-pencil"></i> app/controllers/PostsController.php<br>
 <i class="fa fa-fw fa-terminal"></i> php artisan routes<br>
 	</aside>
@@ -808,7 +771,7 @@ $post = Post::create(
 		</pre>
 		<aside class="notes">
 			<i class="fa fa-fw fa-terminal"></i> git checkout v5.1<br>
-			<i class="fa fa-fw fa-pencil"></i> app/routes.php<br>
+			<i class="fa fa-fw fa-pencil"></i> routes/web.php<br>
 			<i class="fa fa-fw fa-compass"></i> /make-post<br>
 			<i class="fa fa-fw fa-folder"></i> SQL<br>
 		</aside>
@@ -927,7 +890,7 @@ class Post extends Eloquent {
 		<aside class="notes">
 			<i class="fa fa-fw fa-terminal"></i> git checkout v5.2<br>
 			<i class="fa fa-fw fa-pencil"></i> app/models/Post.php<br>
-			<i class="fa fa-fw fa-pencil"></i> app/routes.php<br>
+			<i class="fa fa-fw fa-pencil"></i> routes/web.php<br>
 			<i class="fa fa-fw fa-compass"></i> /make-post<br>
 			<i class="fa fa-fw fa-folder"></i> SQL<br>
 		</aside>
